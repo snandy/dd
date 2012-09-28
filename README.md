@@ -25,5 +25,5 @@
 	
 + dragend
 	<pre>
-	ondragend = function() {}
+	dd.ondragend = function() {}
 	</pre>

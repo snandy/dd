@@ -37,14 +37,16 @@ var doc = window.document, w3c = !!window.addEventListener,
 		function(el, type, fn) { el.removeEventListener(type, fn, false) } :
 		function(el, type, fn) { el.detachEvent("on" + type, fn) };
 
-	function Config(opt) {
-		this.target   = opt.target
-		this.bridge   = opt.bridge
-		this.dragable = opt.dragable != false
-		this.dragX    = opt.dragX != false
-		this.dragY    = opt.dragY != false
-		this.area     = opt.area
-	}
+function Config(opt) {
+	this.target   = opt.target
+	this.bridge   = opt.bridge
+	this.dragable = opt.dragable != false
+	this.dragX    = opt.dragX != false
+	this.dragY    = opt.dragY != false
+	this.area     = opt.area
+}
+
+
 	
 return function(opt) {
 	var conf, defaultConf, diffX, diffY, dd
