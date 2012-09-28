@@ -1,10 +1,6 @@
 /**
- * JavaScript Dragdrop Library v0.4
+ * JavaScript Dragdrop Library
  * Copyright (c) 2010 snandy
- * Blog: http://snandy.javaeye.com/
- * QQ群: 34580561
- * Date: 2010-09-06
- * 
  * 
  * 基本拖拽
  * var dd = new Dragdrop({
@@ -39,11 +35,8 @@ var doc = window.document, w3c = !!window.addEventListener,
 		function(el, type, fn) { el.attachEvent("on" + type, fn) },
 	removeEvent = w3c ?
 		function(el, type, fn) { el.removeEventListener(type, fn, false) } :
-		function(el, type, fn) { el.detachEvent("on" + type, fn) }
- 
-return function(opt) {
-	var conf, defaultConf, diffX, diffY, dd
-	
+		function(el, type, fn) { el.detachEvent("on" + type, fn) };
+
 	function Config(opt) {
 		this.target   = opt.target
 		this.bridge   = opt.bridge
@@ -52,13 +45,18 @@ return function(opt) {
 		this.dragY    = opt.dragY != false
 		this.area     = opt.area
 	}
+	
+return function(opt) {
+	var conf, defaultConf, diffX, diffY, dd
+	
 	function Dragdrop(opt) {
+		var elDown
 		if (!opt) return
 		
 		conf = new Config(opt)
 		defaultConf = new Config(opt)
+		elDown = conf.bridge || conf.target
 		
-		var elDown = conf.bridge || conf.target
 		addEvent(elDown, 'mouseover', function() {
 			this.style.cursor = 'move'
 		})
