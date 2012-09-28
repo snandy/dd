@@ -13,15 +13,17 @@
 	
 
 ## 事件
-	+ dragstart
-		<pre>
-		dd.ondragstart = function() {}
-		</pre>
-	+ darg
-		<pre>
-		dd.ondrag = function() {}
-		</pre>
-	+ dragend
-		<pre>
-		ondragend = function() {}
-		</pre>
++ dragstart
+	<pre>
+	dd.ondragstart = function() {}
+	</pre>
+	
++ darg
+	<pre>
+	dd.ondrag = function() {}
+	</pre>
+	
++ dragend
+	<pre>
+	ondragend = function() {}
+	</pre>
