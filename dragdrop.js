@@ -35,7 +35,7 @@ var doc = window.document, w3c = !!window.addEventListener,
 		function(el, type, fn) { el.attachEvent("on" + type, fn) },
 	removeEvent = w3c ?
 		function(el, type, fn) { el.removeEventListener(type, fn, false) } :
-		function(el, type, fn) { el.detachEvent("on" + type, fn) };
+		function(el, type, fn) { el.detachEvent("on" + type, fn) }
 
 function Config(opt) {
 	this.target   = opt.target
@@ -45,8 +45,6 @@ function Config(opt) {
 	this.dragY    = opt.dragY != false
 	this.area     = opt.area
 }
-
-
 	
 return function(opt) {
 	var conf, defaultConf, diffX, diffY, dd
@@ -116,16 +114,15 @@ return function(opt) {
 		diffY = e.clientY - el.offsetTop
 		addEvent(doc, 'mousemove', mousemove)
 		addEvent(doc, 'mouseup', mouseup)
-		
 		// dragstart event
 		if (dd.ondragstart) {
 			dd.ondragstart()
 		}
 	}
 	function mousemove(e) {
-		var el = conf.target, minX, maxX, minY, maxY
-		moveX = e.clientX - diffX
-		moveY = e.clientY - diffY
+		var el = conf.target, minX, maxX, minY, maxY,
+			moveX = e.clientX - diffX,
+			moveY = e.clientY - diffY
 		
 		if (conf.area) {
 			minX = conf.area[0]
