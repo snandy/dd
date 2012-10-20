@@ -63,11 +63,11 @@ return function(opt) {
 		addEvent(elDown, 'mousedown', mousedown)
 	}
 	Dragdrop.prototype = {
-		dragX: function() {
+		setX: function() {
 			conf.dragX = true
 			conf.dragY = false
 		},
-		dragY: function(b) {
+		setY: function(b) {
 			conf.dragY = true
 			conf.dragX = false
 		},
@@ -89,10 +89,10 @@ return function(opt) {
 			conf.target.style.top = '0px'
 			conf.target.style.left = '0px'
 		},
-		getDragX: function() {
+		getX: function() {
 			return conf.dragX
 		},
-		getDragY: function() {
+		getY: function() {
 			return conf.dragY
 		}
 	}
@@ -143,7 +143,7 @@ return function(opt) {
 		}
 		// drag event
 		if (dd.ondrag) {
-			dd.ondrag()
+			dd.ondrag(moveX, moveY)
 		}
 	}
 	function mouseup(e) {
