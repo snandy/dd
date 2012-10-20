@@ -10,10 +10,10 @@ window.onload = function(){
 		area: [0, maxX, 0, maxY]
 	});
 	dd.ondrag = function(x, y) {
-		if (this.getX()) {
+		if (this.getDragX()) {
 			document.getElementById('x').innerHTML = 'x:' + x;
 		}
-		if (this.getY()) {
+		if (this.getDragY()) {
 			document.getElementById('y').innerHTML = 'y:' + y;
 		}
 	}
@@ -24,10 +24,10 @@ window.onload = function(){
 			dd.dragAll();
 		}				
 		if (target.value == '2' && target.checked) {
-			dd.setX();
+			dd.setDragX();
 		}
 		if (target.value == '3' && target.checked) {
-			dd.setY();
+			dd.setDragY();
 		}
 		if (target.value == '4' && target.checked) {
 			dd.setDragable(false);
