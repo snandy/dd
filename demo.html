@@ -9,6 +9,7 @@
 	<script type="text/javascript" src="dragdrop.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
+			new Dragdrop({target: document.getElementsByTagName('img')[0]})
 			var container = document.getElementById('container');
 			var ele = document.getElementById('d1');
 			var bodyWidth = container.offsetWidth,
@@ -71,5 +72,6 @@
 		<input id="f5" type="radio" value="5" name="flag"/><label for="f5">开启拖拽</label>
 		<input id="f6" type="radio" value="6" name="flag"/><label for="f6">恢复初始状态</label>
 	</div>
+	<img src="http://www.sohu.com/upload/style/../images/logo.gif"/>
   </body>
 </html>
