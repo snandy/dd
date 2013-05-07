@@ -8,7 +8,7 @@
 		dragX 	 true/false false水平方向不可拖拽 (true)默认
 		dragY	 true/false false垂直方向不可拖拽 (true)默认
 		area 	 [minX,maxX,minY,maxY] 指定拖拽范围 默认任意拖动
-		inwin	true/false 仅在浏览器窗口内拖动
+		inwin	true/false 仅在浏览器窗口内拖动 (false)默认
 	})
 	
 
