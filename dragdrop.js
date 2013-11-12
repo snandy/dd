@@ -11,6 +11,7 @@
  *     dragY      true/false false垂直方向不可拖拽 (true)默认
  *     area       [minX,maxX,minY,maxY] 指定拖拽范围 默认任意拖动
  *     inwin      true/false 仅在浏览器窗口内拖动
+ *     fixed      true/false 出现滚动条时保持fixed 默认true
  * });
  * 
  * 事件
@@ -83,6 +84,17 @@ Dragdrop = function(window) {
                 elDown.style.cursor = 'move'
             })
             addEvent(elDown, 'mousedown', mousedown)
+            
+            // 出现滚动条时保持fixed
+            if (conf.fixed) {
+                var docEl = doc.documentElement
+                var target = conf.target
+                addEvent(window, 'scroll', function() {
+                    var winHeight = getWinHeight()
+                    var top = (winHeight)/2 - (target.clientHeight)/2 + docEl.scrollTop
+                    target.style.top = top + 'px'
+                })
+            }
         }
         Dragdrop.prototype = {
             dragX: function() {
