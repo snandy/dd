@@ -29,12 +29,12 @@
  */
 
 Dragdrop = function(window) {
-    var doc = window.document, 
-        w3c = !!window.addEventListener,
-        addEvent = w3c ?
+    var doc = window.document
+    var w3c = !!window.addEventListener
+    var addEvent = w3c ?
             function(el, type, fn) { el.addEventListener(type, fn, false) } :
-            function(el, type, fn) { el.attachEvent("on" + type, fn) },
-        removeEvent = w3c ?
+            function(el, type, fn) { el.attachEvent("on" + type, fn) }
+    var removeEvent = w3c ?
             function(el, type, fn) { el.removeEventListener(type, fn, false) } :
             function(el, type, fn) { el.detachEvent("on" + type, fn) }
     
