@@ -67,6 +67,7 @@ Dragdrop = function(window) {
         this.dragY    = opt.dragY !== false
         this.area     = opt.area || []
         this.inwin    = opt.inwin
+        this.cursor   = opt.cursor || 'move'
     }
         
     return function(opt) {
@@ -79,10 +80,7 @@ Dragdrop = function(window) {
             conf = new Config(opt)
             defaultConf = new Config(opt)
             elDown = conf.bridge || conf.target
-            
-            addEvent(elDown, 'mouseover', function() {
-                elDown.style.cursor = 'move'
-            })
+            elDown.style.cursor = conf.cursor
             addEvent(elDown, 'mousedown', mousedown)
             
             // 出现滚动条时保持fixed
@@ -134,11 +132,11 @@ Dragdrop = function(window) {
             var el = conf.target
             el.style.position = 'absolute'
             
-            if(window.captureEvents){ //标准DOM
+            if (window.captureEvents) { //标准DOM
                 e.stopPropagation()
                 e.preventDefault()
                 addEvent(window, "blur", mouseup)
-            }else if(el.setCapture){ //IE
+            } else if(el.setCapture) { //IE
                 el.setCapture()
                 e.cancelBubble = true
                 addEvent(el, "losecapture", mouseup)
@@ -184,12 +182,11 @@ Dragdrop = function(window) {
             }
             // drag event
             if (dd.ondrag) {
-                dd.ondrag()
+                dd.ondrag(moveX, moveY)
             }
         }
         function mouseup(e) {
             var el = conf.target
-            el.style.cursor = ''
             removeEvent(doc, 'mousemove', mousemove)
             removeEvent(doc, 'mouseup', mouseup)
             

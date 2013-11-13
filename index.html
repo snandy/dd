@@ -27,48 +27,52 @@
  			top: 0px;
  		}
  	</style>
-	<script type="text/javascript" src="dragdrop.js"></script>
-	<script type="text/javascript" src="init.js"></script>
+ 	<script src="http://misc.360buyimg.com/lib/js/e/jquery-1.6.4-min.js"></script>
+	<script src="dragable.js"></script>
 	<script type="text/javascript">
 		window.onload = function(){
-			var container = document.getElementById('container');
-			var ele = document.getElementById('d1');
-			var bodyWidth = container.offsetWidth,
-				bodyHeight = container.offsetHeight;
-			var maxX = bodyWidth - ele.offsetWidth - 10;
-			var maxY = bodyHeight - ele.offsetHeight - 10;
-			var dd = new Dragdrop({
-				target: ele,
+			var container = document.getElementById('container')
+			var ele = document.getElementById('d1')
+			var bodyWidth = container.offsetWidth
+			var	bodyHeight = container.offsetHeight
+			var maxX = bodyWidth - ele.offsetWidth - 10
+			var maxY = bodyHeight - ele.offsetHeight - 10
+			var $elem = $('#d1').dragable({
+				// axis: 'x',
 				area: [0, maxX, 0, maxY]
-			});
-			dd.ondrag = function(x, y) {
-				if (this.getDragX()) {
-					document.getElementById('x').innerHTML = 'x:' + x;
-				}
-				if (this.getDragY()) {
-					document.getElementById('y').innerHTML = 'y:' + y;
-				}
-			}
-			document.getElementById('setting').onclick = function(e) {
-				e = e || event;
-				var target = e.target || e.srcElement;
+			})
+			// dd.ondrag = function(x, y) {
+			// 	if (this.getDragX()) {
+			// 		document.getElementById('x').innerHTML = 'x:' + x;
+			// 	}
+			// 	if (this.getDragY()) {
+			// 		document.getElementById('y').innerHTML = 'y:' + y;
+			// 	}
+			// }
+			document.getElementById('setting').onclick = function(ev) {
+				ev = ev || event;
+				var target = ev.target || ev.srcElement;
 				if (target.value == '1' && target.checked) {
-					dd.dragAll();
+					$elem.dragable('option', 'axis', 'xy')
 				}				
 				if (target.value == '2' && target.checked) {
-					dd.setDragX();
+					$elem.dragable('option', 'axis', 'x')
 				}
 				if (target.value == '3' && target.checked) {
-					dd.setDragY();
+					$elem.dragable('option', 'axis', 'y')
 				}
 				if (target.value == '4' && target.checked) {
-					dd.setDragable(false);
+					$elem.dragable('disable')
 				}
 				if (target.value == '5' && target.checked) {
-					dd.setDragable(true);
+					$elem.dragable('enable')
 				}
 				if (target.value == '6' && target.checked) {
-					dd.reStore();
+					$elem.dragable('reset')
+					$elem.css({
+						top: '0px',
+						left: '0px'
+					})
 					document.getElementById('x').innerHTML = 'x:0';
 					document.getElementById('y').innerHTML = 'y:0';
 				}
