@@ -39,16 +39,12 @@
 			var maxY = bodyHeight - ele.offsetHeight - 10
 			var $elem = $('#d1').dragable({
 				// axis: 'x',
-				area: [0, maxX, 0, maxY]
+				area: [0, maxX, 0, maxY],
+				drag: function(x, y) {
+					document.getElementById('x').innerHTML = 'x:' + x;
+					document.getElementById('y').innerHTML = 'y:' + y;
+				}
 			})
-			// dd.ondrag = function(x, y) {
-			// 	if (this.getDragX()) {
-			// 		document.getElementById('x').innerHTML = 'x:' + x;
-			// 	}
-			// 	if (this.getDragY()) {
-			// 		document.getElementById('y').innerHTML = 'y:' + y;
-			// 	}
-			// }
 			document.getElementById('setting').onclick = function(ev) {
 				ev = ev || event;
 				var target = ev.target || ev.srcElement;

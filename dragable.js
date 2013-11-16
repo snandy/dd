@@ -122,10 +122,11 @@ function initilize(option, jqObject) {
             diffY = ev.clientY - dargElem.offsetTop
             $doc.mousemove(mousemove)
             $doc.mouseup(mouseup)
-            // dragstart event
-            // if (dd.ondragstart) {
-            //     dd.ondragstart()
-            // }
+
+            // drag start event
+            if (option.start) {
+                option.start.call(dragObj)
+            }
         })
 
         function mousemove(ev) {
@@ -159,9 +160,9 @@ function initilize(option, jqObject) {
                 }
             }
             // drag event
-            // if (dd.ondrag) {
-            //     dd.ondrag(moveX, moveY)
-            // }
+            if (option.drag) {
+                option.drag.call(dragObj, moveX, moveY)
+            }
         }
         function mouseup(ev) {
             // 删除事件注册
@@ -174,10 +175,10 @@ function initilize(option, jqObject) {
                 dragObj.unbind('losecapture', mouseup)
                 dargElem.releaseCapture()
             }
-            // dragend evnet
-            // if (dd.ondragend) {
-            //     dd.ondragend()
-            // }
+            // drag end evnet
+            if (option.end) {
+                option.end.call(dragObj)
+            }
         }
         
     })    
