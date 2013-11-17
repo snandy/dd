@@ -4,8 +4,8 @@
  * 
  * 基本拖拽
  * var dd = new Dragdrop({
- *     target     拖拽元素 HTMLElemnt 必选
- *     bridge     指定鼠标按下哪个元素时开始拖拽，实现模态对话框时用到 
+ *     elem     拖拽元素 HTMLElemnt 必选
+ *     handle     指定鼠标按下哪个元素时开始拖拽，实现模态对话框时用到 
  *     dragable   是否可拖拽    (true)默认
  *     dragX      true/false false水平方向不可拖拽 (true)默认
  *     dragY      true/false false垂直方向不可拖拽 (true)默认
@@ -16,13 +16,13 @@
  * 
  * 事件
  * dragstart
- * dd.ondragstart = function() {}
+ * dd.onstart = function() {}
  * 
  * darg
  * dd.ondrag = function() {}
  * 
  * dragend
- * ondragend = function() {}
+ * onend = function() {}
  * 
  * demo.html
  * 
@@ -38,6 +38,7 @@ Dragdrop = function(window) {
             function(el, type, fn) { el.removeEventListener(type, fn, false) } :
             function(el, type, fn) { el.detachEvent("on" + type, fn) }
     
+    // 获取视窗宽度
     function getWinWidth() {
         var arr = []
         if (window.innerWidth) {
@@ -48,6 +49,8 @@ Dragdrop = function(window) {
         }
         return Math.min.apply({}, arr)
     }
+
+    // 获取视窗高度
     function getWinHeight() {
         var arr = []
         if (window.innerHeight) {
@@ -59,9 +62,10 @@ Dragdrop = function(window) {
         return Math.max.apply({}, arr)
     }
     
+    // 配置类
     function Config(opt) {
-        this.target   = opt.target
-        this.bridge   = opt.bridge
+        this.elem     = opt.elem
+        this.handle   = opt.handle
         this.dragable = opt.dragable !== false
         this.dragX    = opt.dragX !== false
         this.dragY    = opt.dragY !== false
@@ -79,18 +83,18 @@ Dragdrop = function(window) {
             
             conf = new Config(opt)
             defaultConf = new Config(opt)
-            elDown = conf.bridge || conf.target
+            elDown = conf.handle || conf.elem
             elDown.style.cursor = conf.cursor
             addEvent(elDown, 'mousedown', mousedown)
             
             // 出现滚动条时保持fixed
             if (conf.fixed) {
                 var docEl = doc.documentElement
-                var target = conf.target
+                var elem  = conf.elem
                 addEvent(window, 'scroll', function() {
                     var winHeight = getWinHeight()
-                    var top = (winHeight)/2 - (target.clientHeight)/2 + docEl.scrollTop
-                    target.style.top = top + 'px'
+                    var top = (winHeight)/2 - (elem.clientHeight)/2 + docEl.scrollTop
+                    elem.style.top = top + 'px'
                 })
             }
         }
@@ -111,15 +115,15 @@ Dragdrop = function(window) {
                 conf.area = a
             },
             setBridge: function(b) {
-                conf.bridge = b
+                conf.handle = b
             },
             setDragable: function(b) {
                 conf.dragable = b
             },
             reStore: function() {
                 conf = new Config(defaultConf)
-                conf.target.style.top = '0px'
-                conf.target.style.left = '0px'
+                conf.elem.style.top = '0px'
+                conf.elem.style.left = '0px'
             },
             getDragX: function() {
                 return conf.dragX
@@ -129,7 +133,7 @@ Dragdrop = function(window) {
             }
         }
         function mousedown(e) {
-            var el = conf.target
+            var el = conf.elem
             el.style.position = 'absolute'
             
             if (window.captureEvents) { //标准DOM
@@ -147,12 +151,12 @@ Dragdrop = function(window) {
             addEvent(doc, 'mousemove', mousemove)
             addEvent(doc, 'mouseup', mouseup)
             // dragstart event
-            if (dd.ondragstart) {
-                dd.ondragstart()
+            if (dd.onstart) {
+                dd.onstart()
             }
         }
         function mousemove(e) {
-            var el = conf.target, minX, maxX, minY, maxY,
+            var el = conf.elem, minX, maxX, minY, maxY,
                 moveX = e.clientX - diffX,
                 moveY = e.clientY - diffY
     
@@ -186,7 +190,7 @@ Dragdrop = function(window) {
             }
         }
         function mouseup(e) {
-            var el = conf.target
+            var el = conf.elem
             removeEvent(doc, 'mousemove', mousemove)
             removeEvent(doc, 'mouseup', mouseup)
             
@@ -197,8 +201,8 @@ Dragdrop = function(window) {
                 el.releaseCapture()
             }
             // dragend evnet
-            if (dd.ondragend) {
-                dd.ondragend()
+            if (dd.onend) {
+                dd.onend()
             }
         }
         

@@ -38,7 +38,7 @@
 			var maxX = bodyWidth - ele.offsetWidth - 10;
 			var maxY = bodyHeight - ele.offsetHeight - 10;
 			var dd = new Dragdrop({
-				target: ele,
+				elem: ele,
 				area: [0, maxX, 0, maxY]
 			});
 			dd.ondrag = function(x, y) {
