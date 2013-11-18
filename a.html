@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>strict mode</title>
+    <style type="text/css">
+ 		body {
+ 			margin:0;
+ 			padding:0;
+ 		}
+ 	</style>
+  </head>
+  <body>
+<script type="text/javascript">
+// function func() {
+// 	'use strict'
+// 	// arguments.callee
+// 	arguments.caller
+// 	var args = arguments
+// 	console.log(args)
+// }
+// func(1, 2)
+
+
+// delete Object.prototype // 报错
+// delete Function.prototype 
+
+// var obj = {}
+// Object.preventExtensions(obj)
+// obj.a = 1 // 报错
+
+
+// var obj = {a:1}
+// window.a = 1
+// delete obj // 报错
+// delete a   // 报错
+
+
+// var obj = {}
+// Object.defineProperty(obj, 'a', {value: 1, writable: false})
+// obj.a = 2 // 报错
+
+'use strict'
+var let = 10
+var yield = 20
+
+
+// if (true) {
+//     function func1() { } // 语法错误
+// }
+// for (var i = 0; i < 5; i++) {
+//     function func2() { } // 语法错误
+// }
+
+// function func(a) {
+//     arguments[0] = 2
+//     alert(arguments[0]) // 2
+// }   
+// func(1)
+
+// function func(a, a) {
+// 	alert(a)
+// }
+// func()
+
+// var obj = {
+// 	a: 1,
+// 	a: 2
+// }
+
+
+</script>
+  </body>
+</html>
