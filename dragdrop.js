@@ -114,7 +114,7 @@ Dragdrop = function(window) {
             setArea: function(a) {
                 conf.area = a
             },
-            setBridge: function(b) {
+            setHandle: function(b) {
                 conf.handle = b
             },
             setDragable: function(b) {
