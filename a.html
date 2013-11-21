@@ -11,6 +11,82 @@
  	</style>
   </head>
   <body>
+<script>
+// 'use strict'
+function func(age, gender) {
+    // console.log(this.name)
+    // console.log(age)
+    // console.log(gender)
+}
+var person = {
+    name: 'John Resig',
+    age: 30
+}
+var f1 = func.bind(person, 30, 'male')
+
+
+// function func() {
+//     console.log(this)
+// }
+// func.call(null)
+
+// func.apply(1)     // number
+
+// if (true) {
+//     function a1() {}
+// } else {
+//     function a2() {}
+// }
+
+// function func(a) {
+//     arguments[0] = 2
+//     alert(arguments[0])
+//     alert(a)
+// }
+// func(1)
+
+// function func(a, a) {
+//     alert(a)
+// }
+// func(1, 2)
+// function Person() {
+// }
+// Person.prototype.name = 'John'
+// detete Person.prototype
+
+// var obj = {name: 'backus'}
+// Object.preventExtensions(obj)
+// obj.name = 30
+
+// var a = 5
+// var obj = {}
+// function func() {
+//     var a = 10
+//     eval('var a = 11')
+//     console.log(a)
+// }
+// obj.func = func
+// obj.func()
+// console.log(a)
+
+function inner() {
+    console.log(arguments.callee.caller)
+}
+function outer() {
+    ;
+    'use strict'
+    globalVar = 100
+    inner()
+}
+// outer()
+
+// function func(a, a) {
+//     console.log(a)
+// }
+</script>
+
+
+
 <script type="text/javascript">
 // function func() {
 // 	'use strict'
@@ -20,7 +96,6 @@
 // 	console.log(args)
 // }
 // func(1, 2)
-
 
 // delete Object.prototype // 报错
 // delete Function.prototype 
@@ -40,10 +115,10 @@
 // Object.defineProperty(obj, 'a', {value: 1, writable: false})
 // obj.a = 2 // 报错
 
-'use strict'
-for (var i=0; i<5; i++) {
+// 'use strict'
+// for (var i=0; i<5; i++) {
     
-}
+// }
 
 
 // if (true) {
@@ -68,8 +143,6 @@ for (var i=0; i<5; i++) {
 // 	a: 1,
 // 	a: 2
 // }
-
-
 </script>
   </body>
 </html>
