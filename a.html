@@ -1,148 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8' />
-    <title>strict mode</title>
-    <style type="text/css">
- 		body {
- 			margin:0;
- 			padding:0;
- 		}
- 	</style>
-  </head>
-  <body>
+    <head>
+        <meta charset='utf-8' />
+        <title>Backbone.Events</title>
+        <script src="http://misc.360buyimg.com/lib/js/e/jquery-1.6.4-min.js"></script>
+    </head>
+
+    <body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
 <script>
-// 'use strict'
-function func(age, gender) {
-    // console.log(this.name)
-    // console.log(age)
-    // console.log(gender)
-}
-var person = {
-    name: 'John Resig',
-    age: 30
-}
-var f1 = func.bind(person, 30, 'male')
+window.onload = function() {
 
+    //当前拖动对象
+    var dragingEl = null;
+    var item = document.getElementsByTagName('li');
 
-// function func() {
-//     console.log(this)
-// }
-// func.call(null)
+    for ( var i = 0; i < item.length; i++ ) {
+        bindEvent(item[i]);
+    }
 
-// func.apply(1)     // number
+    function bindEvent(el) {
+        el.ondragstart = function(e) {
+            // 鼠标样式
+            e.dataTransfer.effectAllowed = "move";
+            // 储存节点HTML
+            e.dataTransfer.setData("text", e.target.innerHTML);
 
-// if (true) {
-//     function a1() {}
-// } else {
-//     function a2() {}
-// }
+            dragingEl = e.target;
+        };
+        el.ondragend = function(e) {
+            e.dataTransfer.clearData("text");
 
-// function func(a) {
-//     arguments[0] = 2
-//     alert(arguments[0])
-//     alert(a)
-// }
-// func(1)
+            dragingEl = null;
+        };
 
-// function func(a, a) {
-//     alert(a)
-// }
-// func(1, 2)
-// function Person() {
-// }
-// Person.prototype.name = 'John'
-// detete Person.prototype
+        el.ondragover = function(e) {
+            e.preventDefault();
+        };
+        el.ondragenter = function(e) {
+            this.className = 'draging';
+        };
+        el.ondragleave = function(e) {
+            this.className = '';
+        };
+        el.ondrop = function(e) {
+            var val = this.innerHTML;
+            this.className = '';
+            this.innerHTML = e.dataTransfer.getData('text');
 
-// var obj = {name: 'backus'}
-// Object.preventExtensions(obj)
-// obj.name = 30
+            dragingEl.innerHTML = val;
+        };
+    }
 
-// var a = 5
-// var obj = {}
-// function func() {
-//     var a = 10
-//     eval('var a = 11')
-//     console.log(a)
-// }
-// obj.func = func
-// obj.func()
-// console.log(a)
-
-function inner() {
-    console.log(arguments.callee.caller)
-}
-function outer() {
-    ;
-    'use strict'
-    globalVar = 100
-    inner()
-}
-// outer()
-
-// function func(a, a) {
-//     console.log(a)
-// }
+};
 </script>
-
-
-
-<script type="text/javascript">
-// function func() {
-// 	'use strict'
-// 	// arguments.callee
-// 	arguments.caller
-// 	var args = arguments
-// 	console.log(args)
-// }
-// func(1, 2)
-
-// delete Object.prototype // 报错
-// delete Function.prototype 
-
-// var obj = {}
-// Object.preventExtensions(obj)
-// obj.a = 1 // 报错
-
-
-// var obj = {a:1}
-// window.a = 1
-// delete obj // 报错
-// delete a   // 报错
-
-
-// var obj = {}
-// Object.defineProperty(obj, 'a', {value: 1, writable: false})
-// obj.a = 2 // 报错
-
-// 'use strict'
-// for (var i=0; i<5; i++) {
-    
-// }
-
-
-// if (true) {
-//     function func1() { } // 语法错误
-// }
-// for (var i = 0; i < 5; i++) {
-//     function func2() { } // 语法错误
-// }
-
-// function func(a) {
-//     arguments[0] = 2
-//     alert(arguments[0]) // 2
-// }   
-// func(1)
-
-// function func(a, a) {
-// 	alert(a)
-// }
-// func()
-
-// var obj = {
-// 	a: 1,
-// 	a: 2
-// }
-</script>
-  </body>
+    </body>
 </html>
