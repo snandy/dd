@@ -2,63 +2,38 @@
 <html>
     <head>
         <meta charset='utf-8' />
-        <title>Backbone.Events</title>
-        <script src="http://misc.360buyimg.com/lib/js/e/jquery-1.6.4-min.js"></script>
+        <title>Add Events</title>
     </head>
-
     <body>
-    <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-    </ul>
-<script>
-window.onload = function() {
+        <!-- 方式1 -->
+        <div id="d1" onclick="fetch()"></div>
+        <script>
+            function fetch() {
+                // ...
+            }
 
-    //当前拖动对象
-    var dragingEl = null;
-    var item = document.getElementsByTagName('li');
+            // 方式2
+            d1.onclick = fetch;
 
-    for ( var i = 0; i < item.length; i++ ) {
-        bindEvent(item[i]);
-    }
+            // 方式3, 4
+            function addListener(el, type, handler) {
+                if (el.addEventListener) {
+                     el.addEventListener(type, handler, false);
+                } else {
+                    el.attachEvent('on' + type, handler);
+                }
+            }
+            addListener(d1, 'click', fetch);
 
-    function bindEvent(el) {
-        el.ondragstart = function(e) {
-            // 鼠标样式
-            e.dataTransfer.effectAllowed = "move";
-            // 储存节点HTML
-            e.dataTransfer.setData("text", e.target.innerHTML);
 
-            dragingEl = e.target;
-        };
-        el.ondragend = function(e) {
-            e.dataTransfer.clearData("text");
+            // 
 
-            dragingEl = null;
-        };
+            // var 中国 = {
+            //     北京: ['海淀', '朝阳'],
+            //     天津: ['红速', '马陆']
+            // }
 
-        el.ondragover = function(e) {
-            e.preventDefault();
-        };
-        el.ondragenter = function(e) {
-            this.className = 'draging';
-        };
-        el.ondragleave = function(e) {
-            this.className = '';
-        };
-        el.ondrop = function(e) {
-            var val = this.innerHTML;
-            this.className = '';
-            this.innerHTML = e.dataTransfer.getData('text');
-
-            dragingEl.innerHTML = val;
-        };
-    }
-
-};
-</script>
+            // var 中国，北京 = ['海淀', '朝阳'];
+        </script>
     </body>
 </html>
